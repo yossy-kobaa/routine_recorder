@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Routine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* タップ時のハイライト無効化・ズーム防止などPWA用設定 */
+        * { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+        body { overscroll-behavior-y: none; }
+    </style>
+</head>
+<body class="bg-slate-100 font-sans h-[100dvh] flex flex-col p-2 overflow-hidden">
+
+    <main class="flex-1 flex flex-col justify-between max-w-md mx-auto w-full gap-1.5">
+
+        <div class="flex justify-center">
+            <button id="date-btn" class="px-3 py-1 rounded-full bg-white border border-slate-300 text-slate-700 text-xs font-medium shadow-sm active:scale-95 transition-transform"></button>
+            <input type="date" id="date-input" class="sr-only" aria-hidden="true">
+        </div>
+
+        <section class="bg-white rounded shadow-sm border border-slate-200 px-2 py-1.5">
+            <h2 class="text-xs font-bold text-slate-800 mb-1 border-b border-slate-100 pb-0.5">筋トレ</h2>
+            <div class="space-y-1">
+                <button class="level-btn w-full text-left p-1.5 rounded border border-slate-100 bg-slate-50 text-slate-700 transition-colors" data-group="workout" data-level="1">
+                    <div class="flex items-start gap-1.5">
+                        <span class="level-badge font-bold text-[10px] text-indigo-600 mt-[1px] whitespace-nowrap">Lv1</span>
+                        <span class="text-xs font-medium leading-tight">スクワット 1セット ＋ ストレッチ</span>
+                    </div>
+                </button>
+                <button class="level-btn w-full text-left p-1.5 rounded border border-slate-100 bg-slate-50 text-slate-700 transition-colors" data-group="workout" data-level="2">
+                    <div class="flex items-start gap-1.5">
+                        <span class="level-badge font-bold text-[10px] text-indigo-600 mt-[1px] whitespace-nowrap">Lv2</span>
+                        <span class="text-xs font-medium leading-tight">懸垂・腕立て・スクワット 各1セット ＋ ストレッチ</span>
+                    </div>
+                </button>
+                <button class="level-btn w-full text-left p-1.5 rounded border border-slate-100 bg-slate-50 text-slate-700 transition-colors" data-group="workout" data-level="3">
+                    <div class="flex items-start gap-1.5">
+                        <span class="level-badge font-bold text-[10px] text-indigo-600 mt-[1px] whitespace-nowrap">Lv3</span>
+                        <span class="text-xs font-medium leading-tight">懸垂・腕立て・スクワット 各2セット ＋ ストレッチ</span>
+                    </div>
+                </button>
+            </div>
+        </section>
+
+        <section class="bg-white rounded shadow-sm border border-slate-200 px-2 py-1.5">
+            <h2 class="text-xs font-bold text-slate-800 mb-1 border-b border-slate-100 pb-0.5">料理</h2>
+            <div class="space-y-1">
+                <button class="level-btn w-full text-left p-1.5 rounded border border-slate-100 bg-slate-50 text-slate-700 transition-colors" data-group="cooking" data-level="1">
+                    <div class="flex items-start gap-1.5">
+                        <span class="level-badge font-bold text-[10px] text-indigo-600 mt-[1px] whitespace-nowrap">Lv1</span>
+                        <span class="text-xs font-medium leading-tight">蒸し野菜（ポン酢） ＋ 冷凍食品</span>
+                    </div>
+                </button>
+                <button class="level-btn w-full text-left p-1.5 rounded border border-slate-100 bg-slate-50 text-slate-700 transition-colors" data-group="cooking" data-level="2">
+                    <div class="flex items-start gap-1.5">
+                        <span class="level-badge font-bold text-[10px] text-indigo-600 mt-[1px] whitespace-nowrap">Lv2</span>
+                        <span class="text-xs font-medium leading-tight">蒸し野菜（自家製ドレ） ＋ プロテイン ＋ 餅</span>
+                    </div>
+                </button>
+                <button class="level-btn w-full text-left p-1.5 rounded border border-slate-100 bg-slate-50 text-slate-700 transition-colors" data-group="cooking" data-level="3">
+                    <div class="flex items-start gap-1.5">
+                        <span class="level-badge font-bold text-[10px] text-indigo-600 mt-[1px] whitespace-nowrap">Lv3</span>
+                        <span class="text-xs font-medium leading-tight">蒸し野菜（自家製ドレ） ＋ 焼き肉 ＋ 餅</span>
+                    </div>
+                </button>
+            </div>
+        </section>
+
+        <section class="bg-white rounded shadow-sm border border-slate-200 px-2 py-1.5">
+            <h2 class="text-xs font-bold text-slate-800 mb-1 border-b border-slate-100 pb-0.5">シャワー</h2>
+            <div class="space-y-1">
+                <button class="level-btn w-full text-left p-1.5 rounded border border-slate-100 bg-slate-50 text-slate-700 transition-colors" data-group="shower" data-level="1">
+                    <div class="flex items-start gap-1.5">
+                        <span class="level-badge font-bold text-[10px] text-indigo-600 mt-[1px] whitespace-nowrap">Lv1</span>
+                        <span class="text-xs font-medium leading-tight">リンスなし</span>
+                    </div>
+                </button>
+                <button class="level-btn w-full text-left p-1.5 rounded border border-slate-100 bg-slate-50 text-slate-700 transition-colors" data-group="shower" data-level="2">
+                    <div class="flex items-start gap-1.5">
+                        <span class="level-badge font-bold text-[10px] text-indigo-600 mt-[1px] whitespace-nowrap">Lv2</span>
+                        <span class="text-xs font-medium leading-tight">リンスあり</span>
+                    </div>
+                </button>
+            </div>
+        </section>
+
+        <section class="bg-white rounded shadow-sm border border-slate-200 px-2 py-1.5">
+            <h2 class="text-xs font-bold text-slate-800 mb-1 border-b border-slate-100 pb-0.5">医学の勉強</h2>
+            <div class="space-y-1">
+                <button class="level-btn w-full text-left p-1.5 rounded border border-slate-100 bg-slate-50 text-slate-700 transition-colors" data-group="study" data-level="1">
+                    <div class="flex items-start gap-1.5">
+                        <span class="level-badge font-bold text-[10px] text-indigo-600 mt-[1px] whitespace-nowrap">Lv1</span>
+                        <span class="text-xs font-medium leading-tight">1ページ以上読む</span>
+                    </div>
+                </button>
+                <button class="level-btn w-full text-left p-1.5 rounded border border-slate-100 bg-slate-50 text-slate-700 transition-colors" data-group="study" data-level="3">
+                    <div class="flex items-start gap-1.5">
+                        <span class="level-badge font-bold text-[10px] text-indigo-600 mt-[1px] whitespace-nowrap">Lv3</span>
+                        <span class="text-xs font-medium leading-tight">1ページ以上読む ＋ Obsidian転記</span>
+                    </div>
+                </button>
+            </div>
+        </section>
+
+        <section class="bg-white rounded shadow-sm border border-slate-200 px-2 py-1.5">
+            <h2 class="text-xs font-bold text-slate-800 mb-1 border-b border-slate-100 pb-0.5">日記</h2>
+            <div class="space-y-1">
+                <button class="level-btn w-full text-left p-1.5 rounded border border-slate-100 bg-slate-50 text-slate-700 transition-colors" data-group="diary" data-level="1">
+                    <div class="flex items-start gap-1.5">
+                        <span class="level-badge font-bold text-[10px] text-indigo-600 mt-[1px] whitespace-nowrap">Lv1</span>
+                        <span class="text-xs font-medium leading-tight">1文字以上書く</span>
+                    </div>
+                </button>
+                <button class="level-btn w-full text-left p-1.5 rounded border border-slate-100 bg-slate-50 text-slate-700 transition-colors" data-group="diary" data-level="3">
+                    <div class="flex items-start gap-1.5">
+                        <span class="level-badge font-bold text-[10px] text-indigo-600 mt-[1px] whitespace-nowrap">Lv3</span>
+                        <span class="text-xs font-medium leading-tight">1文字以上書く ＋ Obsidian転記</span>
+                    </div>
+                </button>
+            </div>
+        </section>
+
+        <button id="submit-btn" class="w-full bg-slate-800 text-white font-bold py-2.5 rounded shadow-md active:scale-95 transition-transform text-sm mt-0.5">
+            データベースへ送信
+        </button>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const DAYS_JA = ['日', '月', '火', '水', '木', '金', '土'];
+            const dateBtn = document.getElementById('date-btn');
+            const dateInput = document.getElementById('date-input');
+
+            function formatDate(dateStr) {
+                // dateStr: "YYYY-MM-DD"
+                const [y, m, d] = dateStr.split('-').map(Number);
+                const day = DAYS_JA[new Date(y, m - 1, d).getDay()];
+                return `${y}.${m}.${d}(${day})`;
+            }
+
+            function toInputValue(date) {
+                const y = date.getFullYear();
+                const m = String(date.getMonth() + 1).padStart(2, '0');
+                const d = String(date.getDate()).padStart(2, '0');
+                return `${y}-${m}-${d}`;
+            }
+
+            const today = new Date();
+            dateInput.value = toInputValue(today);
+            dateBtn.textContent = formatDate(dateInput.value);
+
+            dateBtn.addEventListener('click', () => dateInput.showPicker());
+
+            dateInput.addEventListener('change', () => {
+                dateBtn.textContent = formatDate(dateInput.value);
+            });
+
+            const buttons = document.querySelectorAll('.level-btn');
+            
+            buttons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const group = this.dataset.group;
+                    
+                    // リセット処理
+                    const groupBtns = document.querySelectorAll(`.level-btn[data-group="${group}"]`);
+                    groupBtns.forEach(b => {
+                        b.classList.remove('bg-indigo-600', 'text-white', 'border-indigo-600');
+                        b.classList.add('bg-slate-50', 'text-slate-700', 'border-slate-100');
+                        const badge = b.querySelector('.level-badge');
+                        badge.classList.remove('text-indigo-200');
+                        badge.classList.add('text-indigo-600');
+                    });
+                    
+                    // アクティブ化処理
+                    this.classList.remove('bg-slate-50', 'text-slate-700', 'border-slate-100');
+                    this.classList.add('bg-indigo-600', 'text-white', 'border-indigo-600');
+                    const activeBadge = this.querySelector('.level-badge');
+                    activeBadge.classList.remove('text-indigo-600');
+                    activeBadge.classList.add('text-indigo-200');
+                });
+            });
+
+            // ======================================================
+            // GAS ウェブアプリの URL をここに貼り付ける
+            // ======================================================
+            const GAS_URL = 'https://script.google.com/macros/s/AKfycbwOvTgNffyQlaLawQpjl_JQQK0MikSiCYwIFRcL2ZXhAYKMdh-lRMQr3hHVZ4dxQTHP/exec';
+            // ======================================================
+
+            const submitBtn = document.getElementById('submit-btn');
+
+            submitBtn.addEventListener('click', async () => {
+                const payload = {
+                    date:    dateInput.value,
+                    workout: Number(document.querySelector('.level-btn[data-group="workout"].bg-indigo-600')?.dataset.level ?? 0),
+                    cooking: Number(document.querySelector('.level-btn[data-group="cooking"].bg-indigo-600')?.dataset.level ?? 0),
+                    shower:  Number(document.querySelector('.level-btn[data-group="shower"].bg-indigo-600')?.dataset.level  ?? 0),
+                    study:   Number(document.querySelector('.level-btn[data-group="study"].bg-indigo-600')?.dataset.level   ?? 0),
+                    diary:   Number(document.querySelector('.level-btn[data-group="diary"].bg-indigo-600')?.dataset.level   ?? 0),
+                };
+
+                if (!GAS_URL || GAS_URL === 'YOUR_GAS_WEB_APP_URL') {
+                    alert('GAS_URL が未設定です。\nmain.html の GAS_URL にデプロイ済みURLを貼り付けてください。');
+                    return;
+                }
+
+                submitBtn.disabled = true;
+                submitBtn.textContent = '送信中…';
+
+                // GAS は CORS プリフライトを処理しないため no-cors + form-urlencoded で送信
+                // レスポンスは読めないが、GAS 側でスプレッドシートへの書き込みは実行される
+                try {
+                    await fetch(GAS_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: new URLSearchParams(
+                            Object.fromEntries(Object.entries(payload).map(([k, v]) => [k, String(v)]))
+                        ),
+                    });
+                    submitBtn.textContent = '送信完了 ✓';
+                    submitBtn.classList.replace('bg-slate-800', 'bg-emerald-600');
+                } catch (err) {
+                    submitBtn.textContent = '送信失敗 – 再試行';
+                    submitBtn.classList.replace('bg-slate-800', 'bg-red-600');
+                    console.error(err);
+                } finally {
+                    submitBtn.disabled = false;
+                    setTimeout(() => {
+                        submitBtn.textContent = 'データベースへ送信';
+                        submitBtn.classList.replace('bg-emerald-600', 'bg-slate-800');
+                        submitBtn.classList.replace('bg-red-600', 'bg-slate-800');
+                    }, 3000);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
