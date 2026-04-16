@@ -8,12 +8,14 @@
 // デプロイ後に発行される URL を main.html の GAS_URL へ貼り付ける
 // ===================================================
 
-const SHEET_NAME = 'records';
+const SHEET_NAME   = 'records';
+const SECRET_TOKEN = 'yk_routine_2026';
 
 // ブラウザからの fetch(no-cors) は POST で飛んでくる
 function doPost(e) {
   try {
     const p = e.parameter;
+    if (p.secret !== SECRET_TOKEN) return buildResponse({ result: 'error', message: 'unauthorized' });
     appendRow(p);
     return buildResponse({ result: 'ok' });
   } catch (err) {
@@ -25,6 +27,7 @@ function doPost(e) {
 function doGet(e) {
   try {
     const p = e.parameter;
+    if (p.secret !== SECRET_TOKEN) return buildResponse({ result: 'error', message: 'unauthorized' });
     appendRow(p);
     return buildResponse({ result: 'ok' });
   } catch (err) {

@@ -184,15 +184,17 @@
             });
 
             // ======================================================
-            // GAS ウェブアプリの URL をここに貼り付ける
+            // GAS ウェブアプリの URL とシークレットトークン
             // ======================================================
             const GAS_URL = 'https://script.google.com/macros/s/AKfycbwOvTgNffyQlaLawQpjl_JQQK0MikSiCYwIFRcL2ZXhAYKMdh-lRMQr3hHVZ4dxQTHP/exec';
+            const SECRET   = 'yk_routine_2026';
             // ======================================================
 
             const submitBtn = document.getElementById('submit-btn');
 
             submitBtn.addEventListener('click', async () => {
                 const payload = {
+                    secret:  SECRET,
                     date:    dateInput.value,
                     workout: Number(document.querySelector('.level-btn[data-group="workout"].bg-indigo-600')?.dataset.level ?? 0),
                     cooking: Number(document.querySelector('.level-btn[data-group="cooking"].bg-indigo-600')?.dataset.level ?? 0),
